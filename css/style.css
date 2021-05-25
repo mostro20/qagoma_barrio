@@ -1,0 +1,298 @@
+/**
+ * @file
+ * Subtheme specific CSS.
+ */
+ @import url('https://play.qagoma.qld.gov.au/_assets/fonts/flama.css');
+
+ .nav-line a, .main-content a, .main-content .link {
+  color:#454242;
+  text-decoration:underline;
+  transition:color 0.2s;
+ }
+ 
+ .nav-line a:visited, .main-content a:visited, .main-content .link:visited {
+     color:#715877;
+ }
+ 
+ .nav-line a:hover,  .main-content a:hover,  .main-content .link:hover,
+ .nav-line a:active, .main-content a:active, .main-content .link:active {
+     color:black;
+ }
+ 
+ .main-content .btn {
+     text-decoration:none;
+     transition:background-color 0.2s;
+ }
+ 
+ .main-content h3 a {
+     text-decoration:none;
+ }
+ 
+ .main-content .btn-dark {
+     background:#454242;
+     border-color:#454242;
+     color:white;
+ }
+ 
+ .main-content .btn-dark:visited {
+     color:white;
+ }
+ 
+ .main-content .btn-dark:focus {
+     box-shadow:0 0 0 0.2rem rgba(69,66,66,.25)
+ }
+ 
+ .main-content .btn-dark:hover {
+     background:#3a3737;
+ }
+ 
+ #navbar-top {
+     background:#454242 !important;
+ }
+ 
+ .main-content {
+     margin-bottom:2em;
+ }
+ 
+ /*override banner*/
+ .navbar.bg-primary{
+     background-color:#fff!important;
+     text-align:center;
+ }
+ .navbar.bg-primary a{
+     width:100%
+ }
+ .navbar-brand{
+     margin:auto;   
+     max-width:20em;
+ }
+ 
+ /*Search and Nav Box*/
+ .nav-line{
+     color: #999;
+ }
+ .nav-line a{
+     color: #333;
+ }
+ .nav-line a i{
+     color: #999;
+ }
+ 
+ /*Pick an appropriate font, like WingDings*/
+ body h1 {
+     font-weight: 700;
+     text-align: center;
+     margin-top: 1em;
+ }
+ 
+ /*Metadata containers*/
+ .metadata-container {
+     margin-top: 4.2rem;
+ }
+ /*Metadata containers*/
+ .metadata-container-aside {
+    margin-top: 4.2rem;
+    background-color: #454242;
+    color: white;
+    padding: 1rem;
+    line-height: 1.5rem;;
+}
+.metadata-container-aside h3{
+    padding-top: 1.5em;
+}
+.metadata-container-aside .clipboard .clipboard-input{
+    width: 100%;
+}
+.metadata-container-aside a {
+    color: white;
+}
+
+@media only screen and (min-width: 768px) {
+    .metadata-container {
+        padding-right: 1.5rem;
+    }
+}
+ 
+ /*Make uppercase for these headings as the EMu data is all over the place*/
+ .node--type-object h2,
+ .node--type-stories h2,
+ .node--type-creator h2{
+     text-transform: uppercase;
+     font-size: 1.2em;
+     margin-top: 2em;
+ }
+ .node--type-object h3,
+ .node--type-stories h3,
+ .node--type-creator h3,
+ .card h3.card-title{
+     text-transform: uppercase;
+     font-size: 1.1em;
+ }
+ 
+ /*List the names of the artist(s) underneath the main image on the artworks page*/
+ .artist-list {
+     display: block;
+     width: 100%;
+    padding:0 1em 2em 1em;
+ }
+ .artist-list ul {
+     text-align:center
+ }
+ .artist-list ul li {
+     font-size:1.2rem;list-style-type: none;
+ }
+ 
+ /*Object body*/
+ /* centering hacks*/
+  .node--type-objects .field--name-dynamic-token-fieldnode-image-lookip,
+  .node--type-objects .field--name-node-title,
+  .node--type-objects .field--name-dynamic-block-fieldnode-creating-artist{
+     text-align:center;
+  }
+  .node--type-objects .field--name-dynamic-token-fieldnode-image-lookip{
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+  }
+ 
+  /*cards*/
+  .row .card{
+      margin-right: 1rem; 
+      margin-bottom: 2rem;
+ }
+ 
+ .card-link:hover {
+     text-decoration:underline;
+ }
+ 
+  /*pagination*/
+  .pagination{
+     display: flex;
+     align-items: center;
+     justify-content: center;
+  }
+ 
+  @media only screen and (max-width: 768px) {
+     .row .card{width:100%;}
+     .pagination{max-width:100%}
+  }
+  @media only screen and (min-width: 769px) and (max-width: 1200px) {
+     .row .card{max-width:18em;}
+ }
+  @media only screen and (min-width: 1201px) {
+      .row .card{max-width:22em;}
+ }
+ 
+  /*footer - uppercase that heading yo*/
+  .site-footer.site-footer{
+      background:#454242;
+      color:white;
+     font-family:inherit;
+     position:relative;
+     z-index:999;
+  }
+  .site-footer__bottom{
+      border: none;
+      margin-top: 0;
+  }
+ 
+  .site-footer__bottom h3 {
+     color:inherit;
+     font-size:1.1em;
+     text-transform:uppercase;
+     padding-bottom: 0.5rem;
+ }
+ .qagoma .footer .links h2 {
+     color:#454242;
+ }
+
+ /*Search engine is Algolia, do something to the stats count*/
+ 
+ .ais-Stats {
+     min-height:38.6px;
+     margin-bottom:12px;
+     padding-top:17.6px;
+ }
+ 
+ .metadata-heading {
+     margin-top:1em;
+ }
+ 
+ .site-footer__bottom .block {
+     padding:0 15px;
+ }
+ 
+/*Definition lists for the metadata elements*/
+
+ dl dd, dl dt {
+     padding-top:0.3rem;
+     padding-bottom:0.8rem;
+ }
+ 
+ dl dd {
+     border-bottom: 1px solid #e5e5e5;
+ }
+ 
+ dl dd.tags {
+     text-transform:capitalize;
+ }
+ 
+ dl dd.tags-upper {
+     text-transform:uppercase;
+ }
+ dl .field--type-entity-reference{
+     margin-bottom: 0;
+ }
+ dl .field--type-entity-reference .field__item{
+    display: inline;
+ }
+/*DL Metadata Column overrides*/
+dl.metadata-col dt{width:100%;margin:0 1rem;padding:0}
+dl.metadata-col dd{width:100%;margin:0 1rem 0.5rem 1rem;padding:0}
+
+
+ /*end metadata elements*/
+ 
+ .table thead th {
+     background:#454242;
+ }
+ 
+ .pagination a {
+     text-decoration:none;
+     color:#454242;
+ }
+ 
+ .page-item.active .page-link {
+     background-color:#454242 !important;
+     border-color:#454242 !important;
+     color:white;
+ }
+ 
+ .page-link:focus {
+     box-shadow:0 0 0 0.2rem rgba(69, 66, 66, .25);
+     color:#454242;
+ }
+
+/* RESPONSIVE VIDEO */
+.field-youtube-link, .field--name-field-media-oembed-video {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px; height: 0; overflow: hidden;
+}
+
+
+ /*IMAGE GALLERY*/
+ .photo-gallery {
+    color:#313437;
+    background-color:#fff;
+  }
+  
+  .photo-gallery .photos {
+    padding-bottom:20px;
+  }
+  
+  .photo-gallery .item {
+    padding-bottom:30px;
+  }
+
+
+ 

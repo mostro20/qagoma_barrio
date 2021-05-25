@@ -1,0 +1,14 @@
+
+  <div class="card">
+    <div class="card-body">
+      <a href="{{ url }}">
+        <h3 class="card-title">{{ node.title.value }}</h3>
+      </a>
+      <p class="card-text"><small class="text-muted">{{ content.field_date.0 }}</small></p>
+      <p class="card-text">
+        {% set text = content.body|render|striptags|trim %}
+        {{ (text|length > 200 ? text|slice(0, 201)|split(' ')|slice(0, -1)|join(' ') ~ '&hellip;' : text)|raw }}
+      </p>
+      <a href="{{ url }}" class="card-link">Read <em>{{ node.title.value }}</em> in full</a>
+    </div>
+  </div>

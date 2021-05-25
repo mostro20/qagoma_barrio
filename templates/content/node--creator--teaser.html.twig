@@ -1,0 +1,20 @@
+
+  <div class="card">
+    <div class="card-body">
+      <a href="{{ url }}">
+        <h3 class="card-title">{{ node.title.value }}</h3>
+      </a>
+      <p class="card-subtitle mb-2 text-muted">
+        {{node.field_date_of_birth.value}}
+        {% if node.field_date_of_death is not empty %}
+        - {{node.field_date_of_death.value}}
+        {% else %}
+        - present
+        {% endif %}
+      </p>
+      {% if node.field_principle_country is not empty %}
+        <p class="card-text"><small class="text-muted">{{node.field_principle_country.value}}</small></p>
+      {% endif %}
+      <!--a href="{{ url }}" class="card-link">View objects from {{ node.title.value }}</a-->
+    </div>
+  </div>

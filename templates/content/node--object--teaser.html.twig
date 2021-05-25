@@ -1,0 +1,25 @@
+<div class="card">
+    {% if node.field_image_reference_thumb is not empty %}
+    <a href="{{ url }}">
+      <img
+        src="/sites/default/files/{{ node.field_image_reference_thumb.value }}"
+        alt="Artwork {{ node.title.value }} by [artist name], created in {{ node.field_creation_date_range.value }}"
+        class="card-img-top">
+    </a>
+    {% else %}
+    <a href="{{ url }}">
+      <img
+        src="/sites/default/files/{{ node.field_image_reference.value }}"
+        alt="Artwork {{ node.title.value }} by [artist name], created in {{ node.field_creation_date_range.value }}"
+        class="card-img-top">
+    </a>
+    {% endif %} 
+    <div class="card-body">
+      <a href="{{ url }}"><h3 class="card-title"><em>{{ node.title.value }}</em> {{node.field_date_created.value}}</h3></a>
+      <p class="card-text">{{node.field_creator_list.value}}</p>
+      <ul class="list-group list-group-flush">
+        {{ drupal_view('creating_artists', 'block_1') }}
+      </ul>
+      <!--a href="{{ url }}" class="card-link">View object</a-->
+    </div>
+  </div>

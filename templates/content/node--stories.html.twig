@@ -1,0 +1,199 @@
+{#
+/**
+ * @file
+ * Bootstrap Barrio's theme implementation to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+     Only "getter" methods (method names starting with "get", "has", or "is")
+     and a few common methods such as "id" and "label" are available. Calling
+     other methods (such as node.delete) will result in an exception.
+ * - label: The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: Themed creation date field.
+ * - author_name: Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_node()
+ */
+#}
+{{ attach_library('bootstrap_barrio/node') }}
+
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'clearfix',
+  ]
+%}
+<article{{ attributes.addClass(classes) }}>
+  {% if label and not page %}
+    <header>
+      {{ title_prefix }}
+      {% if not page %}
+        <h2{{ title_attributes.addClass('node__title') }}>
+          <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+        </h2>
+      {% endif %}
+      {{ title_suffix }}
+      {% if display_submitted %}
+        <div class="node__meta">
+          {{ author_picture }}
+          {% block submitted %}
+            <em{{ author_attributes }}>
+              {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
+            </em>
+          {% endblock %}
+          {{ metadata }}
+        </div>
+      {% endif %}
+    </header>
+  {% endif %}
+  <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
+    
+    <h1>
+      {{ node.title.value }} 
+    </h1>
+      <div class="text-center">
+      {% if node.field_author.value is not empty %}
+        By {{ content.field_author }}
+      {% endif %}
+      {% if node.field_contributors.value is not empty %}
+        With contributions from {{ content.field_contributors }}
+      {% endif %}
+      {% if content.field_date is not empty %}
+        Published on {{ content.field_date.0 }}
+      {% endif %}
+
+      </div>
+    
+    <div class="container">
+      <div class="row">
+        <div class="metadata-container col-sm-12 col-md-8">
+          {{ content.body }}
+        </div>
+
+        {# all hardcoded rights and download information #}
+        <div class="col-sm-12 col-md-4">
+          <div class="metadata-container-aside">
+            <h2 class="metadata-heading visually-hidden">Metadata, copyright and sharing information</h2>
+            
+            <h3>Cite this work</h3>
+            <div class="clipboard">
+              <input
+                type="text" 
+                id="clipboardjs"
+                class="clipboard-input"
+                value="{{ node.title.value }}. Cited at {{ url('<current>') }} on {{ "now"|date("m/d/Y") }}"
+                >
+              <a 
+                class="clipboardLink" 
+                data-clipboard-target="#clipboardjs">
+                Copy citation
+              </a>
+            </div>
+            
+            {# all object metadata #}
+            
+            
+            {% if node.field_parent_narrative is not empty %}
+            <h3>Parent story</h3>
+              <p>This story is a sub-component of: {{ content.field_parent_narrative }}</p>
+            {% endif %}
+            
+            
+            <h3>About this story</h3>
+            <dl class="row metadata-col">
+            {% if node.field_linked_event is not empty %}
+              <dt>Linked event</dt>
+              <dd>{{ node.field_linked_event.value }}</dd>
+            {% endif %}
+            {% if node.field_publication is not empty %}
+              <dt>Publication</dt>
+              <dd>{{ node.field_publication.value }}</dd>
+            {% endif %}
+            {% if node.field_subjects is not empty %}
+              <dt>Subject</dt>
+              <dd>{{ content.field_subjects }}</dd>
+            {% endif %}
+            {% if node.field_story_type is not empty %}
+              <dt>Narrative format</dt>
+              <dd>{{ content.field_story_type }}</dd>
+            {% endif %}
+            </dl>
+
+            <h3>Rights information</h3>
+            <p>Place in copyright information in this container</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    {# Related objects #}
+    {% if node.field_related_objects is not empty %}
+    <h2>Related objects</h2>
+    <div class="card-columns">
+    {{content.field_related_objects}}
+    </div>
+    {% endif %}
+
+    {# Related artists #}
+    {% if node.field_artist_stories is not empty %}
+    <h2>Related creators</h2>
+    <div class="card-columns">
+    {{content.field_artist_stories}}
+    </div>
+    {% endif %}
+
+    {#
+    {{ content }}
+    #}
+  </div>
+</article>

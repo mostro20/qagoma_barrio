@@ -1,0 +1,387 @@
+{#
+/**
+ * @file
+ * Bootstrap Barrio's theme implementation to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+     Only "getter" methods (method names starting with "get", "has", or "is")
+     and a few common methods such as "id" and "label" are available. Calling
+     other methods (such as node.delete) will result in an exception.
+ * - label: The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: Themed creation date field.
+ * - author_name: Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_node()
+ */
+#}
+{{ attach_library('bootstrap_barrio/node') }}
+
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'clearfix',
+  ]
+%}
+<article{{ attributes.addClass(classes) }}>
+  {% if label and not page %}
+    <header>
+      {{ title_prefix }}
+      {% if not page %}
+        <h2{{ title_attributes.addClass('node__title') }}>
+          <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+        </h2>
+      {% endif %}
+      {{ title_suffix }}
+      {% if display_submitted %}
+        <div class="node__meta">
+          {{ author_picture }}
+          {% block submitted %}
+            <em{{ author_attributes }}>
+              {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
+            </em>
+          {% endblock %}
+          {{ metadata }}
+        </div>
+      {% endif %}
+    </header>
+  {% endif %}
+  <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
+    
+    <h1><em>{{ node.title.value }}</em> {{node.field_date_created.value}}</p>
+    
+    <h2 class="metadata-heading visually-hidden">Creator details</h2>
+    <div class="artist-list">
+      <ul class="list-group list-group-flush">
+        {{ drupal_view('creating_artists', 'block_1') }}
+      </ul>
+    </div>
+    
+    <div class="container">
+      <div class="row text-center">
+      <img 
+        src="/sites/default/files/{{ node.field_image_reference.value }}" 
+        class="img-fluid mx-auto d-block" 
+        alt="Artwork {{ node.title.value }} by [artist name], created in {{ node.field_creation_date_range.value }}">
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="metadata-container col-sm-12 col-md-8">
+          {# all object metadata #}
+          <h2 class="metadata-heading visually-hidden">Object details</h2>
+          <dl class="row">
+          {% if node.field_accession_no_ is not empty %}
+            <dt class="col-sm-3 field-label-inline">Accession No:</dt>
+            <dd class="col-sm-9">{{ node.field_accession_no_.value }}</dd>
+          {% endif %}
+          {% if node.field_creation_date_range is not empty %}
+            <dt class="col-sm-3 field-label-inline">Creation date range</dt>
+            <dd class="col-sm-9">{{ content.field_creation_date_range.0 }}</dd>
+          {% endif %}
+          {% if node.field_date_created is not empty %}
+            <dt class="col-sm-3 field-label-inline">Date created</dt>
+            <dd class="col-sm-9">{{ node.field_date_created.value }}</dd>
+          {% endif %}
+          {% if node.field_department is not empty %}
+            <dt class="col-sm-3 field-label-inline">Department</dt>
+            <dd class="col-sm-9">{{ node.field_department.value }}</dd>
+          {% endif %}
+          {% if node.field_dimensions is not empty %}
+            <dt class="col-sm-3 field-label-inline">Dimensions A</dt>
+            <dd class="col-sm-9">{{ node.field_dimensions.value }}</dd>
+          {% endif %}
+          {% if node.field_dimensions_b is not empty %}
+            <dt class="col-sm-3 field-label-inline">Dimensions B</dt>
+            <dd class="col-sm-9">{{ node.field_dimensions_b.value }}</dd>
+          {% endif %}
+          {% if node.field_edition is not empty %}
+            <dt class="col-sm-3 field-label-inline">Edition</dt>
+            <dd class="col-sm-9">{{ node.field_edition.value }}</dd>
+          {% endif %}
+          {% if node.field_format is not empty %}
+            <dt class="col-sm-3 field-label-inline">Format</dt>
+            <dd class="col-sm-9">{{ node.field_format.value }}</dd>
+          {% endif %}
+          {% if node.field_medium is not empty %}
+            <dt class="col-sm-3 field-label-inline">Medium</dt>
+            <dd class="col-sm-9">{{ content.field_medium }}</dd>
+          {% endif %}
+          {% if node.field_medium_statement is not empty %}
+            <dt class="col-sm-3 field-label-inline">Medium Statement</dt>
+            <dd class="col-sm-9">{{ node.field_medium_statement.value }}</dd>
+          {% endif %}
+          {% if node.field_physical_location is not empty %}
+            <dt class="col-sm-3 field-label-inline">Physical location</dt>
+            <dd class="col-sm-9">{{ node.field_physical_location.value }}</dd>
+          {% endif %}
+          {% if node.field_place_created is not empty %}
+            <dt class="col-sm-3 field-label-inline">Place created</dt>
+            <dd class="col-sm-9">{{ node.field_place_created.value }}</dd>
+          {% endif %}
+          {% if node.field_publisher is not empty %}
+            <dt class="col-sm-3 field-label-inline">Publisher</dt>
+            <dd class="col-sm-9">{{ node.field_publisher.value }}</dd>
+          {% endif %}
+          {% if node.field_secondary_type_category is not empty %}
+            <dt class="col-sm-3 field-label-inline">Secondary type category</dt>
+            <dd class="col-sm-9">{{ node.field_secondary_type_category.value }}</dd>
+          {% endif %}
+          {% if node.field_source is not empty %}
+            <dt class="col-sm-3 field-label-inline">Source</dt>
+            <dd class="col-sm-9">{{ node.field_source.value }}</dd>
+          {% endif %}
+          {% if node.field_subjects is not empty %}
+            <dt class="col-sm-3 field-label-inline">Subjects</dt>
+            <dd class="col-sm-9">{{ node.field_subjects.value }}</dd>
+          {% endif %}
+          {% if node.field_support is not empty %}
+            <dt class="col-sm-3 field-label-inline">Support</dt>
+            <dd class="col-sm-9">{{ node.field_support.value }}</dd>
+          {% endif %}
+          {% if node.field_type is not empty %}
+            <dt class="col-sm-3 field-label-inline">Type</dt>
+            <dd class="col-sm-9">{{ node.field_type.value }}</dd>
+          {% endif %}
+          </dl>
+        </div>
+
+        {# all hardcoded rights and download information #}
+        <div class="col-sm-12 col-md-4">
+          <div class="metadata-container-aside">
+            <h2 class="metadata-heading visually-hidden">Copyright and sharing information</h2>
+
+            <h3>Cite this work</h3>
+            <div class="clipboard">
+              <input
+                type="text" 
+                id="clipboardjs"
+                class="clipboard-input"
+                value="{{ node.title.value }} {{node.field_date_created.value}} {{ node.field_creator_list.value }} Cited at {{ url('<current>') }} on {{ "now"|date("m/d/Y") }}"
+                >
+              <a 
+                class="clipboardLink" 
+                data-clipboard-target="#clipboardjs">
+                Copy citation
+              </a>
+            </div>
+
+            <h3>Rights information</h3>
+            <p>Place in copyright information in this container</p>
+          
+            <!--
+            ### Re-release when this is available ###
+            <h3>Re-use and download</h3>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><a href="#">Catalogue data as JSON</a></li>
+              <li class="list-group-item"><a href="#">Download link</a></li>
+            </ul>-->
+          
+            <h3>Disclaimer</h3>
+            <p>This catalogue is in a pre-release or beta.</p>
+          </div>  
+        </div>
+      </div>
+    </div>
+    
+    {# related primary narrative, return via view #}
+    {{ drupal_view('creating_narrative', 'block_2') }}
+
+    {# 
+      related secondary narratives, return via view ,
+      NOTE the IF defined check is not working, need to build the TWIG block view
+    #}
+    {{ drupal_view('creating_narrative', 'block_1') }}
+    
+    
+    {# High resolution images if any #}
+    
+    {% if node.field_high_resolution_image is not empty %}
+      <h2>High resolution imagery</h2>
+      <p>Click or touch the images below to explore high resolution versions of the image.</p>
+      <div class="card-group">
+      {% set image_uri = node.field_high_resolution_image|file_uri %}
+      {% if image_uri is not null %}
+      <div class="card">
+        <img 
+          src="{{ image_uri|image_style('large') }}" 
+          data-image="{{ file_url(node.field_high_resolution_image.entity.uri.value) }}"
+          data-title="<em>{{ node.title.value }}</em> {{node.field_date_created.value}}" 
+          data-caption="{{ node.field_high_resolution_image.caption }}" 
+          alt="{{ node.field_high_resolution_image.alt }}" 
+          class="intense" />
+        <div class="card-body">
+          <p class="card-text">{{ node.field_high_resolution_image.title }}</p>
+        </div>
+      </div>
+      {% endif %}
+      </div>
+      <script>
+      window.onload = function() {
+        // Intensify all images with the 'intense' classname.
+          var elements = document.querySelectorAll( '.intense' );
+        Intense( elements );
+      }
+      </script>
+    {% endif %}
+
+
+    {# image sliders #}
+
+    {% if node.field_image_sliders is not empty %}
+      <div class="container">
+        <h2>Image sliders</h2>
+        <div class="row">
+          <div class="col-sm">
+              <p>{{ node.field_image_sliders[0].caption }}</p>
+              <div id="beer-slider" class="beer-slider" data-beer-label="before">
+                <img src="{{ file_url(node.field_image_sliders[0].entity.uri.value) }}" alt="{{ node.field_image_sliders[0].alt }}">
+                <div class="beer-reveal" data-beer-label="after">
+                    <img src="{{ file_url(node.field_image_sliders[1].entity.uri.value) }}" alt="{{ node.field_image_sliders[1].alt }}">
+                </div>
+              </div>
+          </div>
+        </div>
+        {# if 3 and 4 exist #}
+        {% if node.field_image_sliders|length > 2 %}
+        <div class="row">
+          <div class="col-sm">
+              <p>{{ node.field_image_sliders[2].caption }}</p>
+              <div id="beer-slider" class="beer-slider" data-beer-label="before">
+                <img src="{{ file_url(node.field_image_sliders[2].entity.uri.value) }}" alt="{{ node.field_image_sliders[2].alt }}">
+                <div class="beer-reveal" data-beer-label="after">
+                    <img src="{{ file_url(node.field_image_sliders[3].entity.uri.value) }}" alt="{{ node.field_image_sliders[3].alt }}">
+                </div>
+              </div>
+          </div>
+        </div>
+        {% endif %}
+
+        {# if 5 and 6 exist #}
+        {% if node.field_image_sliders|length > 4 %}
+        <div class="row">
+          <div class="col-sm">
+              <p>{{ node.field_image_sliders[4].caption }}</p>
+              <div id="beer-slider" class="beer-slider" data-beer-label="before">
+                <img src="{{ file_url(node.field_image_sliders[4].entity.uri.value) }}" alt="{{ node.field_image_sliders[4].alt }}">
+                <div class="beer-reveal" data-beer-label="after">
+                    <img src="{{ file_url(node.field_image_sliders[5].entity.uri.value) }}" alt="{{ node.field_image_sliders[5].alt }}">
+                </div>
+              </div>
+          </div>
+        </div>
+        {% endif %}
+
+        {# if 7 and 8 exist #}
+        {% if node.field_image_sliders|length > 6 %}
+        <div class="row">
+          <div class="col-sm">
+              <p>{{ node.field_image_sliders[6].caption }}</p>
+              <div id="beer-slider" class="beer-slider" data-beer-label="before">
+                <img src="{{ file_url(node.field_image_sliders[6].entity.uri.value) }}" alt="{{ node.field_image_sliders[6].alt }}">
+                <div class="beer-reveal" data-beer-label="after">
+                    <img src="{{ file_url(node.field_image_sliders[7].entity.uri.value) }}" alt="{{ node.field_image_sliders[7].alt }}">
+                </div>
+              </div>
+          </div>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {# image carousels #}
+
+    {% if node.field_image_carousel is not empty %}
+    <div class="photo-gallery">
+      <div class="container">
+          <h2>Image Gallery</h2>
+          <div class="row photos">
+          {% set imageNo = 0 %}
+          {% for image in node.field_image_carousel %}
+            <div class="col-sm-6 col-md-4 col-lg-3 item">
+              <a href="{{ file_url(node.field_image_carousel[imageNo].entity.uri.value) }}" data-lightbox="photos">
+                <img 
+                  alt="{{ node.field_image_carousel[imageNo].alt }}"
+                  class="img-fluid" 
+                  src="{{ file_url(node.field_image_carousel[imageNo].entity.uri.value) }}">
+              </a>
+            </div>
+            {% set imageNo = imageNo + 1 %}
+          {% endfor %}
+          </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {# 
+      related videos, returned via view 
+    #} 
+    {{ drupal_view('creating_video', 'block_2') }}
+
+    {# TODO related data #}
+
+    {# 3D viewer#}
+    {% if node.field_obj_3d_file is not empty %}
+    <p>{{ node.field_obj_3d_file.description }}</p>
+    <div class="online_3d_viewer"
+        style="width: 800px; height: 600px;"
+        model="{{ file_url(content.field_obj_3d_file['#items'].entity.uri.value) }}"
+        camera="3,1,2,0,0,0,0,0,1">
+    </div>
+    {% endif %}
+
+    {#
+    {{ content }}
+    #}
+  </div>
+</article>
