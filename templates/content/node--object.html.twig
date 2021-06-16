@@ -109,9 +109,9 @@
     <div class="container">
       <div class="row text-center">
       <img 
-        src="/sites/default/files/{{ node.field_image_reference.value }}" 
+        src="{{ node.field_image_reference.value }}" 
         class="img-fluid mx-auto d-block" 
-        alt="Artwork {{ node.title.value }} by [artist name], created in {{ node.field_creation_date_range.value }}">
+        alt="Artwork {{ node.title.value }} this atwork made of {{ node.field_medium_statement.value }}, created in {{ node.field_creation_date_range.value }}">
       </div>
     </div>
 
