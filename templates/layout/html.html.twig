@@ -44,15 +44,15 @@
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css">
       <script src="https://polyfill.io/v3/polyfill.min.js?features=default%2CArray.prototype.find%2CArray.prototype.includes%2CPromise%2CObject.assign%2CObject.entries"></script>
       <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dialog-polyfill/0.5.1/dialog-polyfill.min.css" />
-      <link rel="stylesheet" href="/src/index.css">
-      <link rel="stylesheet" href="/src/BeerSlider.css">
+      
+      <link rel="stylesheet" href="/libraries/beerslider/BeerSlider.css">
       <link rel="stylesheet" id="qagoma-css" href="//play.qagoma.qld.gov.au/_assets/css/qagoma-header-footer.css?ver=1.1.3" type="text/css" media="all">
-      <link rel="stylesheet" href="/src/app.css">
+      <link rel="stylesheet" href="/libraries/algolia/app.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
 
       {# 3D viewer for Obj files - see https://github.com/kovacsv/Online3DViewer #}
-      <script type="text/javascript" src="/src/three.min-126.js"></script>
-      <script type="text/javascript" src="/src/o3dv.min-0.7.6.js"></script>
+      <script type="text/javascript" src="/libraries/3dviewer/three.min-126.js"></script>
+      <script type="text/javascript" src="/libraries/3dviewer/o3dv.min-0.7.6.js"></script>
       <script type='text/javascript'>
           OV.Init3DViewerElements ();
       </script>
@@ -100,10 +100,10 @@
   <script type='text/javascript' src='https://learning.qagoma.qld.gov.au/wp-content/themes/qagoma-learning/js/qagoma.js?ver=1.1.3'></script>
   <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.5.1/dist/algoliasearch-lite.umd.js" integrity="sha256-EXPXz4W6pQgfYY3yTpnDa3OH8/EPn16ciVsPQ/ypsjk=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.8.3/dist/instantsearch.production.min.js" integrity="sha256-LAGhRRdtVoD6RLo2qDQsU2mp+XVSciKRC8XPOBWmofM=" crossorigin="anonymous"></script>
-  <script src="/src/app-simple.js"></script>
+  <script src="/libraries/algolia/app-simple.js"></script>
   
   {# Intense #}
-  <script src="/src/intense.min.js"></script>
+  <script src="/libraries/intense/intense.min.js"></script>
 
   {# image gallery #}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
@@ -115,7 +115,7 @@
   </script>
   
   {# Beer Slider #}
-  <script src="/src/BeerSlider.js"></script>
+  <script src="/libraries/beerslider/BeerSlider.js"></script>
   <script>
     $.fn.BeerSlider = function ( options ) {
       options = options || {};
