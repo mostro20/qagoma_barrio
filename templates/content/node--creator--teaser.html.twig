@@ -5,16 +5,19 @@
         <h3 class="card-title">{{ node.title.value }}</h3>
       </a>
       <p class="card-subtitle mb-2 text-muted">
-        {{node.field_date_of_birth.value}}
+        {{content.field_date_of_birth.0}}
         {% if node.field_date_of_death is not empty %}
-        - {{node.field_date_of_death.value}}
+        - {{content.field_date_of_death.0}}
         {% else %}
         - present
         {% endif %}
+        {% if node.field_principle_country is not empty %}
+          {% set country %}
+              {{ content.field_principle_country }}
+          {% endset %}	
+          | {{ country|striptags }}
+        {% endif %}
       </p>
-      {% if node.field_principle_country is not empty %}
-        <p class="card-text"><small class="text-muted">{{node.field_principle_country.value}}</small></p>
-      {% endif %}
-      <!--a href="{{ url }}" class="card-link">View objects from {{ node.title.value }}</a-->
+      <a href="{{ url }}" class="card-link">Full profile for {{ node.title.value }}</a>
     </div>
   </div>
