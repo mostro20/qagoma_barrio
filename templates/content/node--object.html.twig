@@ -108,11 +108,17 @@
     
     <div class="container">
       <div class="row text-center">
-      <img 
-        src="{{ node.field_image_reference.value }}" 
-        class="img-fluid mx-auto d-block" 
-        alt="Artwork {{ node.title.value }} this atwork made of {{ node.field_medium_statement.value }}, created in {{ node.field_creation_date_range.value }}">
-      </div>
+      {% if node.field_image_reference is not empty %}
+        <img
+          src="{{ node.field_image_reference.value }}"
+          alt="Artwork {{ node.title.value }} this atwork made of {{ node.field_medium_statement.value }}, created in {{ node.field_creation_date_range.value }}"
+          class="img-fluid mx-auto d-block">
+      {% else %}
+        <img
+          src="/sites/default/files/image-pending.jpg"
+          alt="Artwork has not been digitised or available dur to copyright concerns, thus not currently available online"
+          class="img-fluid mx-auto d-block">
+      {% endif %} 
     </div>
 
     <div class="container">
@@ -135,7 +141,7 @@
           {% endif %}
           {% if node.field_department is not empty %}
             <dt class="col-sm-3 field-label-inline">Department</dt>
-            <dd class="col-sm-9">{{ node.field_department.value }}</dd>
+            <dd class="col-sm-9">{{ content.field_department }}</dd>
           {% endif %}
           {% if node.field_dimensions is not empty %}
             <dt class="col-sm-3 field-label-inline">Dimensions A</dt>
@@ -167,7 +173,7 @@
           {% endif %}
           {% if node.field_place_created is not empty %}
             <dt class="col-sm-3 field-label-inline">Place created</dt>
-            <dd class="col-sm-9">{{ node.field_place_created.value }}</dd>
+            <dd class="col-sm-9">{{ content.field_place_created }}</dd>
           {% endif %}
           {% if node.field_publisher is not empty %}
             <dt class="col-sm-3 field-label-inline">Publisher</dt>
@@ -175,7 +181,7 @@
           {% endif %}
           {% if node.field_secondary_type_category is not empty %}
             <dt class="col-sm-3 field-label-inline">Secondary type category</dt>
-            <dd class="col-sm-9">{{ node.field_secondary_type_category.value }}</dd>
+            <dd class="col-sm-9">{{ content.field_secondary_type_category }}</dd>
           {% endif %}
           {% if node.field_source is not empty %}
             <dt class="col-sm-3 field-label-inline">Source</dt>
@@ -183,7 +189,7 @@
           {% endif %}
           {% if node.field_subjects is not empty %}
             <dt class="col-sm-3 field-label-inline">Subjects</dt>
-            <dd class="col-sm-9">{{ node.field_subjects.value }}</dd>
+            <dd class="col-sm-9">{{ content.field_subjects }}</dd>
           {% endif %}
           {% if node.field_support is not empty %}
             <dt class="col-sm-3 field-label-inline">Support</dt>
@@ -191,7 +197,7 @@
           {% endif %}
           {% if node.field_type is not empty %}
             <dt class="col-sm-3 field-label-inline">Type</dt>
-            <dd class="col-sm-9">{{ node.field_type.value }}</dd>
+            <dd class="col-sm-9">{{ content.field_type }}</dd>
           {% endif %}
           </dl>
         </div>
@@ -217,7 +223,13 @@
             </div>
 
             <h3>Rights information</h3>
-            <p>Place in copyright information in this container</p>
+            <p>
+            {% if node.field_rights is not empty %}
+            {{ node.field_rights.value }}
+            {% else %}
+            The Queensland Art Gallery | Gallery of Modern Art respects the rights of all artists and copyright holders. No image may be reproduced, transmitted or copied without permission. Contravention is an infringement of Australia's Copyright Act 1968. Requests for reproduction and publication of the Gallery's art works should be referred to <a href="mailto:reproductions@qagoma.qld.gov.au">Reproductions</a>.
+            {% endif %}
+            </p>
           
             <!--
             ### Re-release when this is available ###
@@ -244,7 +256,7 @@
     {{ drupal_view('creating_narrative', 'block_1') }}
     
     
-    {# High resolution images if any #}
+    {# High resolution images if any - plan to replace with tiling service from Cantalopue #}
     
     {% if node.field_high_resolution_image is not empty %}
       <h2>High resolution imagery</h2>
