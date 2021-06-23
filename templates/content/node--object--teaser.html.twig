@@ -2,24 +2,33 @@
     {% if node.field_image_reference_thumb is not empty %}
     <a href="{{ url }}">
       <img
-        src="/sites/default/files/{{ node.field_image_reference_thumb.value }}"
+        src="{{ node.field_image_reference_thumb.value }}"
+        alt="Artwork {{ node.title.value }} by [artist name], created in {{ node.field_creation_date_range.value }}"
+        class="card-img-top">
+    </a>
+    {% elseif node.field_image_reference is not empty %}
+    <a href="{{ url }}">
+      <img
+        src="{{ node.field_image_reference.value }}"
         alt="Artwork {{ node.title.value }} by [artist name], created in {{ node.field_creation_date_range.value }}"
         class="card-img-top">
     </a>
     {% else %}
     <a href="{{ url }}">
       <img
-        src="/sites/default/files/{{ node.field_image_reference.value }}"
-        alt="Artwork {{ node.title.value }} by [artist name], created in {{ node.field_creation_date_range.value }}"
+        src="/sites/default/files/image-pending.jpg"
+        alt="Artwork has not been digitised or available dur to copyright concerns, thus not currently available online"
         class="card-img-top">
     </a>
     {% endif %} 
     <div class="card-body">
-      <a href="{{ url }}"><h3 class="card-title"><em>{{ node.title.value }}</em> {{node.field_date_created.value}}</h3></a>
-      <p class="card-text">{{node.field_creator_list.value}}</p>
-      <ul class="list-group list-group-flush">
-        {{ drupal_view('creating_artists', 'block_1') }}
-      </ul>
-      <!--a href="{{ url }}" class="card-link">View object</a-->
+      <a href="{{ url }}" title="View {{ node.title.value }} object details"><h3 class="card-title"><em>{{ node.title.value }}</em> {{node.field_date_created.value}}</h3></a>
+      <p class="card-text">
+        {# 
+          <!-- TODO Field not yet defined in data import -->
+          {{node.field_creator_list.value}} 
+        #}
+        TODO: Creator List
+      </p>
     </div>
   </div>
