@@ -111,6 +111,7 @@
       {% if node.field_image_reference is not empty %}
         <img
           src="{{ node.field_image_reference.value }}"
+          onerror="this.onerror=null;this.src='/sites/default/files/image-pending.jpg';"
           alt="Artwork {{ node.title.value }} this atwork made of {{ node.field_medium_statement.value }}, created in {{ node.field_creation_date_range.value }}"
           class="img-fluid mx-auto d-block">
       {% else %}
@@ -225,7 +226,7 @@
             <h3>Rights information</h3>
             <p>
             {% if node.field_rights is not empty %}
-            {{ node.field_rights.value }}
+            Copyright of {{ node.field_rights.value }}
             {% else %}
             The Queensland Art Gallery | Gallery of Modern Art respects the rights of all artists and copyright holders. No image may be reproduced, transmitted or copied without permission. Contravention is an infringement of Australia's Copyright Act 1968. Requests for reproduction and publication of the Gallery's art works should be referred to <a href="mailto:reproductions@qagoma.qld.gov.au">Reproductions</a>.
             {% endif %}

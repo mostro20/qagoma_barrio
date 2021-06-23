@@ -77,6 +77,12 @@
  .nav-line a i{
      color: #999;
  }
+
+ .top-bespoke-nav {
+     margin: 0.2rem 0 0 1.2rem;
+ }
+ .navbar-light ul.navbar-nav .nav-link { color:rgba(0,0,0,0.7);text-decoration:underline} 
+ .navbar-light ul.navbar-nav .nav-link:hover { color:rgba(0,0,0,0.9);} 
  
  /*Pick an appropriate font, like WingDings*/
  body h1 {
@@ -103,8 +109,20 @@
 .metadata-container-aside .clipboard .clipboard-input{
     width: 100%;
 }
-.metadata-container-aside a {
+
+.metadata-container-aside dl dd {
+    border-bottom: none;
+}
+
+.metadata-container-aside a,
+.metadata-container-aside dl dd a,
+.metadata-container-aside dl dd a:visited,
+.metadata-container-aside dl dd a:active {
     color: white;
+}
+.metadata-container-aside a:hover,
+.metadata-container-aside dl dd a:hover {
+    color: rgba(255,255,255,0.8);
 }
 
 @media only screen and (min-width: 768px) {
