@@ -156,17 +156,20 @@
             <dt class="col-sm-3 field-label-inline">Edition</dt>
             <dd class="col-sm-9">{{ node.field_edition.value }}</dd>
           {% endif %}
-          {% if node.field_format is not empty %}
-            <dt class="col-sm-3 field-label-inline">Format</dt>
-            <dd class="col-sm-9">{{ node.field_format.value }}</dd>
-          {% endif %}
           {% if node.field_medium is not empty %}
             <dt class="col-sm-3 field-label-inline">Medium</dt>
             <dd class="col-sm-9">{{ content.field_medium }}</dd>
           {% endif %}
           {% if node.field_medium_statement is not empty %}
             <dt class="col-sm-3 field-label-inline">Medium Statement</dt>
-            <dd class="col-sm-9">{{ node.field_medium_statement.value }}</dd>
+            <dd class="col-sm-9">
+              {{ node.field_medium_statement.value }}
+              {% if node.field_support is not empty %}; {{ node.field_support.value }}{% endif %}
+            </dd>
+          {% endif %}
+          {% if node.field_type is not empty %}
+            <dt class="col-sm-3 field-label-inline">Media category</dt>
+            <dd class="col-sm-9">{{ content.field_type }}</dd>
           {% endif %}
           {% if node.field_physical_location is not empty %}
             <dt class="col-sm-3 field-label-inline">Physical location</dt>
@@ -185,20 +188,12 @@
             <dd class="col-sm-9">{{ content.field_secondary_type_category }}</dd>
           {% endif %}
           {% if node.field_source is not empty %}
-            <dt class="col-sm-3 field-label-inline">Source</dt>
+            <dt class="col-sm-3 field-label-inline">Credit line</dt>
             <dd class="col-sm-9">{{ node.field_source.value }}</dd>
           {% endif %}
           {% if node.field_subjects is not empty %}
             <dt class="col-sm-3 field-label-inline">Subjects</dt>
             <dd class="col-sm-9">{{ content.field_subjects }}</dd>
-          {% endif %}
-          {% if node.field_support is not empty %}
-            <dt class="col-sm-3 field-label-inline">Support</dt>
-            <dd class="col-sm-9">{{ node.field_support.value }}</dd>
-          {% endif %}
-          {% if node.field_type is not empty %}
-            <dt class="col-sm-3 field-label-inline">Type</dt>
-            <dd class="col-sm-9">{{ content.field_type }}</dd>
           {% endif %}
           </dl>
         </div>
