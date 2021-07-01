@@ -4,6 +4,11 @@
  */
  @import url('https://play.qagoma.qld.gov.au/_assets/fonts/flama.css');
 
+/*make QAGOMA header not sticky, and submenu sticky*/
+ .qagoma .m-wrap.not-sticky{
+    position: absolute;   
+ }
+
  .nav-line a, .main-content a, .main-content .link {
   color:#454242;
   text-decoration:underline;
@@ -54,7 +59,7 @@
      margin-bottom:2em;
  }
  
- /*override banner*/
+ /*override default bootstrap banner bits banner*/
  .navbar.bg-primary{
      background-color:#fff!important;
      text-align:center;
@@ -65,6 +70,9 @@
  .navbar-brand{
      margin:auto;   
      max-width:20em;
+ }
+ #navbar-main{
+     display: none;
  }
  
  /*Search and Nav Box*/
@@ -78,9 +86,19 @@
      color: #999;
  }
 
- .top-bespoke-nav {
-     margin: 0.2rem 0 0 1.2rem;
+ /*bespoke nav for Collection Online Beta links*/
+ .navbar-brand {
+    margin:0
  }
+ .top-bespoke-nav {
+     -ms-flex-direction: row;
+     flex-direction: row;
+     align-items: left;
+ }
+ .top-bespoke-nav li {
+    margin: 0.2rem 0.4rem 0;
+ }
+
  .navbar-light ul.navbar-nav .nav-link { color:rgba(0,0,0,0.7);text-decoration:underline} 
  .navbar-light ul.navbar-nav .nav-link:hover { color:rgba(0,0,0,0.9);} 
  
@@ -262,6 +280,9 @@
  }
  dl .field--type-entity-reference .field__item{
     display: inline;
+ }
+ dl .field--name-field-subjects .field__item{
+    padding-right: 0.5rem;
  }
 /*DL Metadata Column overrides*/
 dl.metadata-col dt{width:100%;margin:0 1rem;padding:0}

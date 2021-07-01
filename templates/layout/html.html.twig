@@ -105,6 +105,24 @@
   {# Intense #}
   <script src="/libraries/intense/intense.min.js"></script>
 
+  {# Make Nav sticky #}
+  <script>
+  document.addEventListener("DOMContentLoaded", function(){
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+          document.getElementById('sticky-top').classList.add('fixed-top', 'nav-transition');
+          // add padding top to show content behind navbar
+          navbar_height = document.querySelector('.navbar').offsetHeight;
+          document.body.style.paddingTop = navbar_height + 'px';
+        } else {
+          document.getElementById('sticky-top').classList.remove('fixed-top', 'nav-transition');
+          // remove padding top from body
+          document.body.style.paddingTop = '0';
+        } 
+    });
+  }); 
+  </script>
+
   {# image gallery #}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
 

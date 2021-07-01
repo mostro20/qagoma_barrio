@@ -132,10 +132,12 @@
             <dt class="col-sm-3 field-label-inline">Accession No:</dt>
             <dd class="col-sm-9">{{ node.field_accession_no_.value }}</dd>
           {% endif %}
+          {#
           {% if node.field_creation_date_range is not empty %}
             <dt class="col-sm-3 field-label-inline">Creation date range</dt>
             <dd class="col-sm-9">{{ content.field_creation_date_range.0 }}</dd>
           {% endif %}
+          #}
           {% if node.field_date_created is not empty %}
             <dt class="col-sm-3 field-label-inline">Date created</dt>
             <dd class="col-sm-9">{{ node.field_date_created.value }}</dd>
@@ -221,7 +223,7 @@
             <h3>Rights information</h3>
             <p>
             {% if node.field_rights is not empty %}
-            Copyright of {{ node.field_rights.value }}
+            &copy; {{ node.field_rights.value }}
             {% else %}
             The Queensland Art Gallery | Gallery of Modern Art respects the rights of all artists and copyright holders. No image may be reproduced, transmitted or copied without permission. Contravention is an infringement of Australia's Copyright Act 1968. Requests for reproduction and publication of the Gallery's art works should be referred to <a href="mailto:reproductions@qagoma.qld.gov.au">Reproductions</a>.
             {% endif %}
