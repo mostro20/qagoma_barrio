@@ -4,7 +4,7 @@
       <img
         src="{{ node.field_image_reference_thumb.value }}"
         onerror="this.onerror=null;this.src='/sites/default/files/image-pending.jpg';"
-        alt="Artwork {{ node.title.value }} by [artist name], created in {{ node.field_creation_date_range.value }}"
+        alt="Artwork {{ node.title.value }} this artwork made of {{ node.field_medium_statement.value }}, created in {{ node.field_creation_date_range.value }}"
         class="card-img-top">
     </a>
     {% elseif node.field_image_reference is not empty %}
@@ -12,14 +12,14 @@
       <img
         src="{{ node.field_image_reference.value }}"
         onerror="this.onerror=null;this.src='/sites/default/files/image-pending.jpg';"
-        alt="Artwork {{ node.title.value }} by [artist name], created in {{ node.field_creation_date_range.value }}"
+        alt="Artwork {{ node.title.value }} this artwork made of {{ node.field_medium_statement.value }}, created in {{ node.field_creation_date_range.value }}"
         class="card-img-top">
     </a>
     {% else %}
     <a href="{{ url }}">
       <img
         src="/sites/default/files/image-pending.jpg"
-        alt="Artwork has not been digitised or available dur to copyright concerns, thus not currently available online"
+        alt="Artwork has not been digitised or not available due to pending copyright clearence, thus not currently available online"
         class="card-img-top">
     </a>
     {% endif %} 

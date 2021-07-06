@@ -112,12 +112,12 @@
         <img
           src="{{ node.field_image_reference.value }}"
           onerror="this.onerror=null;this.src='/sites/default/files/image-pending.jpg';"
-          alt="Artwork {{ node.title.value }} this atwork made of {{ node.field_medium_statement.value }}, created in {{ node.field_creation_date_range.value }}"
+          alt="Artwork {{ node.title.value }} this artwork made of {{ node.field_medium_statement.value }}, created in {{ node.field_creation_date_range.value }}"
           class="img-fluid mx-auto d-block">
       {% else %}
         <img
           src="/sites/default/files/image-pending.jpg"
-          alt="Artwork has not been digitised or available dur to copyright concerns, thus not currently available online"
+          alt="Artwork has not been digitised or not available due to pending copyright clearence, thus not currently available online"
           class="img-fluid mx-auto d-block">
       {% endif %} 
     </div>
@@ -293,7 +293,7 @@
         <h2>Image sliders</h2>
         <div class="row">
           <div class="col-sm">
-              <p>{{ node.field_image_sliders[0].caption }}</p>
+              <h3>{{ node.field_image_sliders[0].caption }}</h3>
               <div id="beer-slider" class="beer-slider" data-beer-label="before">
                 <img src="{{ file_url(node.field_image_sliders[0].entity.uri.value) }}" alt="{{ node.field_image_sliders[0].alt }}">
                 <div class="beer-reveal" data-beer-label="after">
@@ -306,7 +306,7 @@
         {% if node.field_image_sliders|length > 2 %}
         <div class="row">
           <div class="col-sm">
-              <p>{{ node.field_image_sliders[2].caption }}</p>
+              <h3 class="pt-4">{{ node.field_image_sliders[2].caption }}</h3>
               <div id="beer-slider" class="beer-slider" data-beer-label="before">
                 <img src="{{ file_url(node.field_image_sliders[2].entity.uri.value) }}" alt="{{ node.field_image_sliders[2].alt }}">
                 <div class="beer-reveal" data-beer-label="after">
@@ -321,7 +321,7 @@
         {% if node.field_image_sliders|length > 4 %}
         <div class="row">
           <div class="col-sm">
-              <p>{{ node.field_image_sliders[4].caption }}</p>
+              <h3 class="pt-4">{{ node.field_image_sliders[4].caption }}</h3>
               <div id="beer-slider" class="beer-slider" data-beer-label="before">
                 <img src="{{ file_url(node.field_image_sliders[4].entity.uri.value) }}" alt="{{ node.field_image_sliders[4].alt }}">
                 <div class="beer-reveal" data-beer-label="after">
@@ -336,7 +336,7 @@
         {% if node.field_image_sliders|length > 6 %}
         <div class="row">
           <div class="col-sm">
-              <p>{{ node.field_image_sliders[6].caption }}</p>
+              <h3 class="pt-4">{{ node.field_image_sliders[6].caption }}</h3>
               <div id="beer-slider" class="beer-slider" data-beer-label="before">
                 <img src="{{ file_url(node.field_image_sliders[6].entity.uri.value) }}" alt="{{ node.field_image_sliders[6].alt }}">
                 <div class="beer-reveal" data-beer-label="after">
@@ -371,6 +371,23 @@
           </div>
       </div>
     </div>
+    {% endif %}
+
+    {#
+      related links
+    #}
+    {% if node.field_external_references is not empty %}
+    <h2>Other QAGOMA resources</h2>
+    <div class="card-columns">
+      {% set linkNo = 0 %}
+      {% for image in node.field_external_references %}
+        <div class="card card-body">
+          {{content.field_external_references[linkNo]}}
+        </div>
+        {% set linkNo = linkNo + 1 %}
+      {% endfor %}
+    </div>
+
     {% endif %}
 
     {# 
