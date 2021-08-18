@@ -113,7 +113,7 @@
           src="{{ node.field_image_reference.value }}"
           onerror="this.onerror=null;this.src='/sites/default/files/image-pending.jpg';"
           alt="Artwork {{ node.title.value }} this artwork made of {{ node.field_medium_statement.value }}, created in {{ node.field_creation_date_range.value }}"
-          class="img-fluid mx-auto d-block">
+          class="img-fluid mx-auto d-block img-featured">
       </div>
       <div class="row">
         <p class="text-center" style="width:100%">
@@ -135,7 +135,7 @@
         <img
           src="/sites/default/files/image-pending.jpg"
           alt="Artwork has not been digitised or not available due to pending copyright clearence, thus not currently available online"
-          class="img-fluid mx-auto d-block">
+          class="img-fluid mx-auto d-block img-featured">
       {% endif %} 
     </div>
 
@@ -272,123 +272,16 @@
     
     
     {# High resolution images if any - plan to replace with tiling service from Cantalopue #}
-    
-    {% if node.field_high_resolution_image is not empty %}
-      <h2>High resolution imagery</h2>
-      <p>Click or touch the images below to explore high resolution versions of the image.</p>
-      <div class="card-group">
-      {% set image_uri = node.field_high_resolution_image|file_uri %}
-      {% if image_uri is not null %}
-      <div class="card">
-        <img 
-          src="{{ image_uri|image_style('large') }}" 
-          data-image="{{ file_url(node.field_high_resolution_image.entity.uri.value) }}"
-          data-title="<em>{{ node.title.value }}</em> {{node.field_date_created.value}}" 
-          data-caption="{{ node.field_high_resolution_image.caption }}" 
-          alt="{{ node.field_high_resolution_image.alt }}" 
-          class="intense" />
-        <div class="card-body">
-          <p class="card-text">{{ node.field_high_resolution_image.title }}</p>
-        </div>
-      </div>
-      {% endif %}
-      </div>
-      <script>
-      window.onload = function() {
-        // Intensify all images with the 'intense' classname.
-          var elements = document.querySelectorAll( '.intense' );
-        Intense( elements );
-      }
-      </script>
-    {% endif %}
 
+    {{ drupal_view('creating_highresimg', 'block_2') }}
 
     {# image sliders #}
 
-    {% if node.field_image_sliders is not empty %}
-      <div class="container">
-        <h2>Image sliders</h2>
-        <div class="row">
-          <div class="col-sm">
-              <h3>{{ node.field_image_sliders[0].caption }}</h3>
-              <div id="beer-slider" class="beer-slider" data-beer-label="before">
-                <img src="{{ file_url(node.field_image_sliders[0].entity.uri.value) }}" alt="{{ node.field_image_sliders[0].alt }}">
-                <div class="beer-reveal" data-beer-label="after">
-                    <img src="{{ file_url(node.field_image_sliders[1].entity.uri.value) }}" alt="{{ node.field_image_sliders[1].alt }}">
-                </div>
-              </div>
-          </div>
-        </div>
-        {# if 3 and 4 exist #}
-        {% if node.field_image_sliders|length > 2 %}
-        <div class="row">
-          <div class="col-sm">
-              <h3 class="pt-4">{{ node.field_image_sliders[2].caption }}</h3>
-              <div id="beer-slider" class="beer-slider" data-beer-label="before">
-                <img src="{{ file_url(node.field_image_sliders[2].entity.uri.value) }}" alt="{{ node.field_image_sliders[2].alt }}">
-                <div class="beer-reveal" data-beer-label="after">
-                    <img src="{{ file_url(node.field_image_sliders[3].entity.uri.value) }}" alt="{{ node.field_image_sliders[3].alt }}">
-                </div>
-              </div>
-          </div>
-        </div>
-        {% endif %}
-
-        {# if 5 and 6 exist #}
-        {% if node.field_image_sliders|length > 4 %}
-        <div class="row">
-          <div class="col-sm">
-              <h3 class="pt-4">{{ node.field_image_sliders[4].caption }}</h3>
-              <div id="beer-slider" class="beer-slider" data-beer-label="before">
-                <img src="{{ file_url(node.field_image_sliders[4].entity.uri.value) }}" alt="{{ node.field_image_sliders[4].alt }}">
-                <div class="beer-reveal" data-beer-label="after">
-                    <img src="{{ file_url(node.field_image_sliders[5].entity.uri.value) }}" alt="{{ node.field_image_sliders[5].alt }}">
-                </div>
-              </div>
-          </div>
-        </div>
-        {% endif %}
-
-        {# if 7 and 8 exist #}
-        {% if node.field_image_sliders|length > 6 %}
-        <div class="row">
-          <div class="col-sm">
-              <h3 class="pt-4">{{ node.field_image_sliders[6].caption }}</h3>
-              <div id="beer-slider" class="beer-slider" data-beer-label="before">
-                <img src="{{ file_url(node.field_image_sliders[6].entity.uri.value) }}" alt="{{ node.field_image_sliders[6].alt }}">
-                <div class="beer-reveal" data-beer-label="after">
-                    <img src="{{ file_url(node.field_image_sliders[7].entity.uri.value) }}" alt="{{ node.field_image_sliders[7].alt }}">
-                </div>
-              </div>
-          </div>
-        </div>
-        {% endif %}
-    </div>
-    {% endif %}
+    {{ drupal_view('creating_imageslider', 'block_2') }}
 
     {# image carousels #}
 
-    {% if node.field_image_carousel is not empty %}
-    <div class="photo-gallery">
-      <div class="container">
-          <h2>Image Gallery</h2>
-          <div class="row photos">
-          {% set imageNo = 0 %}
-          {% for image in node.field_image_carousel %}
-            <div class="col-sm-6 col-md-4 col-lg-3 item">
-              <a href="{{ file_url(node.field_image_carousel[imageNo].entity.uri.value) }}" data-lightbox="photos">
-                <img 
-                  alt="{{ node.field_image_carousel[imageNo].alt }}"
-                  class="img-fluid" 
-                  src="{{ file_url(node.field_image_carousel[imageNo].entity.uri.value) }}">
-              </a>
-            </div>
-            {% set imageNo = imageNo + 1 %}
-          {% endfor %}
-          </div>
-      </div>
-    </div>
-    {% endif %}
+     {{ drupal_view('creating_photogallery', 'block_2') }}
 
     {#
       related links

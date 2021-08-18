@@ -1,0 +1,60 @@
+    {% if node.field_image_sliders is not empty %}
+      <div class="container">
+        <h2>Image sliders</h2>
+        <div class="row">
+          <div class="col-sm">
+              <h3>{{ node.field_image_sliders[0].caption }}</h3>
+              <div id="beer-slider" class="beer-slider" data-beer-label="before">
+                <img src="{{ file_url(node.field_image_sliders[0].entity.uri.value) }}" alt="{{ node.field_image_sliders[0].alt }}">
+                <div class="beer-reveal" data-beer-label="after">
+                    <img src="{{ file_url(node.field_image_sliders[1].entity.uri.value) }}" alt="{{ node.field_image_sliders[1].alt }}">
+                </div>
+              </div>
+          </div>
+        </div>
+        {# if 3 and 4 exist #}
+        {% if node.field_image_sliders|length > 2 %}
+        <div class="row">
+          <div class="col-sm">
+              <h3 class="pt-4">{{ node.field_image_sliders[2].caption }}</h3>
+              <div id="beer-slider" class="beer-slider" data-beer-label="before">
+                <img src="{{ file_url(node.field_image_sliders[2].entity.uri.value) }}" alt="{{ node.field_image_sliders[2].alt }}">
+                <div class="beer-reveal" data-beer-label="after">
+                    <img src="{{ file_url(node.field_image_sliders[3].entity.uri.value) }}" alt="{{ node.field_image_sliders[3].alt }}">
+                </div>
+              </div>
+          </div>
+        </div>
+        {% endif %}
+
+        {# if 5 and 6 exist #}
+        {% if node.field_image_sliders|length > 4 %}
+        <div class="row">
+          <div class="col-sm">
+              <h3 class="pt-4">{{ node.field_image_sliders[4].caption }}</h3>
+              <div id="beer-slider" class="beer-slider" data-beer-label="before">
+                <img src="{{ file_url(node.field_image_sliders[4].entity.uri.value) }}" alt="{{ node.field_image_sliders[4].alt }}">
+                <div class="beer-reveal" data-beer-label="after">
+                    <img src="{{ file_url(node.field_image_sliders[5].entity.uri.value) }}" alt="{{ node.field_image_sliders[5].alt }}">
+                </div>
+              </div>
+          </div>
+        </div>
+        {% endif %}
+
+        {# if 7 and 8 exist #}
+        {% if node.field_image_sliders|length > 6 %}
+        <div class="row">
+          <div class="col-sm">
+              <h3 class="pt-4">{{ node.field_image_sliders[6].caption }}</h3>
+              <div id="beer-slider" class="beer-slider" data-beer-label="before">
+                <img src="{{ file_url(node.field_image_sliders[6].entity.uri.value) }}" alt="{{ node.field_image_sliders[6].alt }}">
+                <div class="beer-reveal" data-beer-label="after">
+                    <img src="{{ file_url(node.field_image_sliders[7].entity.uri.value) }}" alt="{{ node.field_image_sliders[7].alt }}">
+                </div>
+              </div>
+          </div>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}

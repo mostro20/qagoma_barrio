@@ -1,0 +1,49 @@
+      {% set image_uri = node.field_high_resolution_image|file_uri %}
+      {% set image_width = node.field_high_resolution_image.0.width %}
+      {% set image_height = node.field_high_resolution_image.0.height %}
+
+      <h2>High resolution imagery</h2>
+      <p>
+        Click or touch the images below to explore high resolution version of the image.
+        Click or touch the images below to explore high resolution version of the image.
+        Click or touch the images below to explore high resolution version of the image.
+        Click or touch the images below to explore high resolution version of the image.
+      </p>
+      
+      
+
+
+      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"></script>
+      <div id="image-map" style="width:100%;margin-bottom:10px;height:750px"></div>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+      <script>
+      // Using leaflet.js to pan and zoom a big image.
+      // See also: http://kempe.net/blog/2014/06/14/leaflet-pan-zoom-image.html
+
+      // create the slippy map
+      var map = L.map('image-map', {
+        minZoom: 1,
+        maxZoom: 6,
+        center: [0, 0],
+        zoom: 3,
+        crs: L.CRS.Simple
+      });
+
+      // dimensions of the image
+      var w = {{ image_width }},
+          h = {{ image_height }},
+          url = '{{ file_url(node.field_high_resolution_image.entity.uri.value) }}';
+
+      // calculate the edges of the image, in coordinate space
+      var southWest = map.unproject([0, h], map.getMaxZoom()-1);
+      var northEast = map.unproject([w, 0], map.getMaxZoom()-1);
+      var bounds = new L.LatLngBounds(southWest, northEast);
+
+      // add the image overlay, 
+      // so that it covers the entire map
+      L.imageOverlay(url, bounds).addTo(map);
+
+      // tell leaflet that the map is exactly as big as the image
+      map.setMaxBounds(bounds);
+      </script>
