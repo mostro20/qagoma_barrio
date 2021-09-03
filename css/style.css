@@ -100,7 +100,19 @@
  }
 
  .navbar-light ul.navbar-nav .nav-link { color:rgba(0,0,0,0.7);text-decoration:underline} 
- .navbar-light ul.navbar-nav .nav-link:hover { color:rgba(0,0,0,0.9);} 
+ .navbar-light ul.navbar-nav .nav-link:hover,
+ .navbar-light ul.navbar-nav .nav-link:active { 
+     color:rgba(0,0,0,0.9);
+    } 
+
+/*Position the pulldown menu on desktop so it doesn't go off screen*/
+ @media only screen and (min-width: 567px) {
+    .top-bespoke-nav .dropdown-menu.show{        
+        left: -6rem;
+    }
+}
+
+
  
  /*Pick an appropriate font, like WingDings*/
  body h1 {
@@ -199,6 +211,11 @@
  .card-link:hover {
      text-decoration:underline;
  }
+
+ /*feature image*/
+ .img-featured {
+     max-height: 95vh;
+ }
  
   /*pagination*/
   .pagination{
@@ -207,16 +224,38 @@
      justify-content: center;
   }
  
-  @media only screen and (max-width: 768px) {
-     .row .card{width:100%;}
+  /*rows and cards columns */
+  @media only screen and (min-width: 567px) {
+    .row .card{width:100%;}
+    .pagination{max-width:100%}
+}
+  @media only screen and (min-width: 568px) and (max-width: 768px) {
+    .row .card-columns.feature-splash {column-count: 2;}
+    .row .card{width:100%;}
      .pagination{max-width:100%}
   }
   @media only screen and (min-width: 769px) and (max-width: 1200px) {
      .row .card{max-width:18em;}
+     .row .card-columns.feature-splash {column-count: 2;}
+     .row .card-columns.feature-splash .card {max-width:36em;}
  }
   @media only screen and (min-width: 1201px) {
       .row .card{max-width:22em;}
+      .row .card-columns.feature-splash {column-count: 2;}
+      .row .card-columns.feature-splash .card {max-width:44em;}
  }
+
+ .card-img-overlay {
+     top: revert;
+     bottom: 0.5rem;
+     background-color: white;
+     text-align: left;
+     padding: 0.5em;
+     margin: 0 5% 5% 40%;
+
+ }
+ .card-img-overlay a {color: #454242; text-decoration: none;}
+ .card-img-overlay a:hover, .card-img-overlay a:active, .card-img-overlay a:visited {color: #454242; text-decoration: underline;}
  
   /*footer - uppercase that heading yo*/
   .site-footer.site-footer{
@@ -334,4 +373,19 @@ dl.metadata-col dd{width:100%;margin:0 1rem 0.5rem 1rem;padding:0}
   }
 
 
+  /*PRESENTATION HACKS, PLEASE REMOVE*/
+
+iframe{
+    overflow:hidden;
+}
+.mb-0 .btn-link{color: black; font-size: 1.1rem;}
+
+.accordion .card-header{ background-color: white;}
+
+.form-item-field-creation-date-range-value-min,
+.form-item-field-creation-date-range-value-max{ display: inline-block}
+
+#edit-actions {align-self: center;margin-top:16px;}
+
+#edit-actions .btn-primary{color:white; background-color:#454242; border: none;}
  
