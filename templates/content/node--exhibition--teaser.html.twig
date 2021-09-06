@@ -1,0 +1,16 @@
+
+  <div class="card">
+    <div class="card-body">
+      <a href="{{ url }}">
+        <h3 class="card-title">{{ node.title.value }}</h3>
+      </a>
+      <p class="card-subtitle mb-2 text-muted">
+        {% if node.field_creation_date_range is not empty %}
+        {{node.field_creation_date_range.value}}
+        {% else %}
+        Date unknown
+        {% endif %}
+      </p>
+      <a href="{{ url }}" class="card-link">Full profile for {{ node.title.value }}</a>
+    </div>
+  </div>
