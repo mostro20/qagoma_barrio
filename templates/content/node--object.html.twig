@@ -247,12 +247,9 @@
             </p>
           
             <!--
-            ### Re-release when this is available ###
+            ### Re-release when this when site is Drupal rather than Static ### -->
             <h3>Re-use and download</h3>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item"><a href="#">Catalogue data as JSON</a></li>
-              <li class="list-group-item"><a href="#">Download link</a></li>
-            </ul>-->
+            <p><a href="/api/objects/{{ node.field_inter.value }}">Catalogue data as JSON</a></p>
           
             <h3>Disclaimer</h3>
             <p>This catalogue is in its beta release (v0.7 September 2021). There are known issues which are iteratively improving with new releases.</p>
@@ -305,7 +302,7 @@
     #} 
     {{ drupal_view('creating_video', 'block_2') }}
 
-    {# TODO related data #}
+
 
     {# 3D viewer#}
     {% if node.field_obj_3d_file is not empty %}
@@ -316,6 +313,10 @@
         camera="3,1,2,0,0,0,0,0,1">
     </div>
     {% endif %}
+
+    {# TODO related data #}
+    {# Similar result - need to rebuild taxonomy import #}
+    {#{ drupal_view('similar_taxonomy', 'block_1') }#}
 
     {#
     {{ content }}

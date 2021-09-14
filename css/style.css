@@ -145,13 +145,11 @@
 }
 
 .metadata-container-aside a,
-.metadata-container-aside dl dd a,
-.metadata-container-aside dl dd a:visited,
-.metadata-container-aside dl dd a:active {
+.metadata-container-aside a:visited,
+.metadata-container-aside a:active {
     color: white;
 }
-.metadata-container-aside a:hover,
-.metadata-container-aside dl dd a:hover {
+.metadata-container-aside a:hover {
     color: rgba(255,255,255,0.8);
 }
 
