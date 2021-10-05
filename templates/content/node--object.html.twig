@@ -316,7 +316,9 @@
 
     {# TODO related data #}
     {# Similar result - need to rebuild taxonomy import #}
-    {#{ drupal_view('similar_taxonomy', 'block_1') }#}
+    {{ drupal_view('similar_taxonomy', 'block_1') }}
+
+    {{ drupal_view('similar_taxonomy', 'block_2') }}
 
     {#
     {{ content }}

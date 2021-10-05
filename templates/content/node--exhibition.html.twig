@@ -117,7 +117,8 @@
       {{ node.title.value }}<br>
       <small>
         {% if node.field_creation_date_range is not empty %}
-        {{node.field_creation_date_range.value}}
+        {{ node.field_creation_date_range.value|date('M Y') }} - 
+        {{ node.field_creation_date_range.end_value|date('M Y') }} 
         {% else %}
         Date unknown
         {% endif %}
@@ -126,7 +127,15 @@
     
     <h2 class="metadata-heading visually-hidden">Exhibition details</h2>
     <div class="metadata-container">
-      <p>{{ body }}</p>
+      
+      <p class="lead">
+        {% set bodyTags = node.body.value %}
+
+        {{ bodyTags|check_markup('unrestricted_html') }}
+
+        {#{ node.body.value|check_markup('restricted_html') }#}
+      </p>
+      
       <dl class="row">
 
         {% if node.field_organising_groups is not empty %}
@@ -152,6 +161,15 @@
     {# related secondary narratives, return via view #}
     {{ drupal_view('creating_narrative', 'block_3') }}
 
+    {# related exhibitions #}
+    {% if node.field_related_exhibitions is not empty %}
+
+      <h3>Related exhibitions</h3>
+      <div class="card-columns">
+      {{content.field_related_exhibitions}}
+      </div>
+
+    {% endif %}
     
     
     {#

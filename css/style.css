@@ -112,6 +112,8 @@
     }
 }
 
+/*not sure why this is not overriding, good to check that out*/
+.dropdown-item a:active{background-color: #f8f9fa;}
 
  
  /*Pick an appropriate font, like WingDings*/
@@ -243,17 +245,35 @@
       .row .card-columns.feature-splash .card {max-width:44em;}
  }
 
+ /*Overlay text onto feature images*/
+
  .card-img-overlay {
      top: revert;
      bottom: 0.5rem;
      background-color: white;
      text-align: left;
      padding: 0.5em;
-     margin: 0 5% 5% 40%;
+     margin: 0 5% 17.5% 40%;
 
  }
- .card-img-overlay a {color: #454242; text-decoration: none;}
- .card-img-overlay a:hover, .card-img-overlay a:active, .card-img-overlay a:visited {color: #454242; text-decoration: underline;}
+ .card-img-overlay h3,  
+ .card-img-overlay p {
+     color: #454242; 
+     text-decoration: none;
+}
+ .card-img-overlay:hover, 
+ .card-img-overlay:active, 
+ .card-img-overlay:visited {
+     color: #454242; 
+     text-decoration: underline;
+    }
+
+    /*make the captions less in your face*/
+    .card-columns.feature-splash p.text-muted a,
+    .card-columns.feature-splash p.text-muted a:hover,
+    .card-columns.feature-splash p.text-muted a:active{
+        color: #6c757d;
+    }
  
   /*footer - uppercase that heading yo*/
   .site-footer.site-footer{
