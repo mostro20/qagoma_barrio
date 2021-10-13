@@ -4,10 +4,14 @@
  */
  @import url('https://play.qagoma.qld.gov.au/_assets/fonts/flama.css');
 
+body, h1, h2, h3, h4, h5, p, li, a{font-family: Flama, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;}
+
 /*make QAGOMA header not sticky, and submenu sticky*/
- .qagoma .m-wrap.not-sticky{
-    position: absolute;   
- }
+@media only screen and (min-width: 769px) { 
+    .qagoma .m-wrap.not-sticky{
+        position: absolute;   
+    }
+}
 
  .nav-line a, .main-content a, .main-content .link {
   color:#454242;
@@ -48,7 +52,8 @@
  }
  
  .main-content .btn-dark:hover {
-     background:#3a3737;
+    color: white; 
+    background:#3a3737;
  }
  
  #navbar-top {
@@ -60,67 +65,108 @@
  }
  
  /*override default bootstrap banner bits banner*/
- .navbar.bg-primary{
+ .navbar.bg-primary {
      background-color:#fff!important;
      text-align:center;
  }
- .navbar.bg-primary a{
+
+ .navbar.bg-primary a {
      width:100%
  }
- .navbar-brand{
+
+ .navbar-brand {
      margin:auto;   
      max-width:20em;
  }
- #navbar-main{
+
+ #navbar-main {
      display: none;
  }
  
  /*Search and Nav Box*/
- .nav-line{
+ .nav-line {
      color: #999;
  }
- .nav-line a{
+
+ .nav-line a {
      color: #333;
  }
- .nav-line a i{
+
+ .nav-line a i {
      color: #999;
  }
 
  /*bespoke nav for Collection Online Beta links*/
+ section.header h1 {
+    text-align: center;
+    font-weight: 300;
+    font-size: 2.2em;
+    margin:0.5em 0;
+    }
+
+ section.header h1 a {
+        color: #454242;
+    }
+ 
  .navbar-brand {
     margin:0
  }
+
  .top-bespoke-nav {
      -ms-flex-direction: row;
      flex-direction: row;
-     align-items: left;
- }
- .top-bespoke-nav li {
-    margin: 0.2rem 0.4rem 0;
+     align-items: left;   
  }
 
- .navbar-light ul.navbar-nav .nav-link { color:rgba(0,0,0,0.7);text-decoration:underline} 
+ .navbar.navbar-expand-sm .navbar-nav {
+     margin:auto;
+ }
+
+ .highlighted .bg-light {
+     background-color: white!important;
+ }
+
+ .top-bespoke-nav li {
+    margin: 0.4rem 0.4rem 0;
+ }
+
+ .navbar-light ul.navbar-nav .nav-link { 
+     color:rgba(0,0,0,0.7);
+ } 
+
  .navbar-light ul.navbar-nav .nav-link:hover,
  .navbar-light ul.navbar-nav .nav-link:active { 
      color:rgba(0,0,0,0.9);
-    } 
+     text-decoration:underline
+ } 
 
 /*Position the pulldown menu on desktop so it doesn't go off screen*/
- @media only screen and (min-width: 567px) {
-    .top-bespoke-nav .dropdown-menu.show{        
-        left: -6rem;
+
+@media only screen and (max-width: 576px) {
+    .top-bespoke-nav .dropdown .dropdown-menu.show {        
+        margin-left: -9rem;
+    }
+    .navbar-expand-sm .navbar-collapse {
+        display: flex!important;
     }
 }
 
-/*not sure why this is not overriding, good to check that out*/
-.dropdown-item a:active{background-color: #f8f9fa;}
 
- 
- /*Pick an appropriate font, like WingDings*/
+
+ .dropdown-item:active {
+    background-color: #f8f9fa!important;
+    color: #454242;    
+ }
+
  body h1 {
-     font-weight: 700;
+     font-weight: 500;
      text-align: center;
      margin-top: 1em;
+     margin-bottom: 1em;
+ }
+
+ body p {
+     line-height: 1.5em;
  }
  
  /*Metadata containers*/
@@ -135,10 +181,12 @@
     padding: 1rem;
     line-height: 1.5rem;;
 }
-.metadata-container-aside h3{
+
+.metadata-container-aside h3 {
     padding-top: 1.5em;
 }
-.metadata-container-aside .clipboard .clipboard-input{
+
+.metadata-container-aside .clipboard .clipboard-input {
     width: 100%;
 }
 
@@ -151,6 +199,7 @@
 .metadata-container-aside a:active {
     color: white;
 }
+
 .metadata-container-aside a:hover {
     color: rgba(255,255,255,0.8);
 }
@@ -164,15 +213,16 @@
  /*Make uppercase for these headings as the EMu data is all over the place*/
  .node--type-object h2,
  .node--type-stories h2,
- .node--type-creator h2{
+ .node--type-creator h2 {
      text-transform: uppercase;
      font-size: 1.2em;
      margin-top: 2em;
  }
+
  .node--type-object h3,
  .node--type-stories h3,
  .node--type-creator h3,
- .card h3.card-title{
+ .card h3.card-title {
      text-transform: uppercase;
      font-size: 1.1em;
  }
@@ -183,9 +233,11 @@
      width: 100%;
     padding:0 1em 2em 1em;
  }
+ 
  .artist-list ul {
      text-align:center
  }
+
  .artist-list ul li {
      font-size:1.2rem;list-style-type: none;
  }
@@ -194,27 +246,44 @@
  /* centering hacks*/
   .node--type-objects .field--name-dynamic-token-fieldnode-image-lookip,
   .node--type-objects .field--name-node-title,
-  .node--type-objects .field--name-dynamic-block-fieldnode-creating-artist{
+  .node--type-objects .field--name-dynamic-block-fieldnode-creating-artist {
      text-align:center;
   }
-  .node--type-objects .field--name-dynamic-token-fieldnode-image-lookip{
+ 
+  .node--type-objects .field--name-dynamic-token-fieldnode-image-lookip {
       margin-top: 2rem;
       margin-bottom: 2rem;
   }
  
   /*cards*/
-  .row .card{
+  .row .card {
       margin-right: 1rem; 
       margin-bottom: 2rem;
+      border: none;
  }
  
+ .card-body{
+     padding-top:0.5em;
+ }
+
+ .card-body a {
+     text-decoration: none;
+ }
+ .card-body a:hover {
+    text-decoration: underline;
+}
+
  .card-link:hover {
      text-decoration:underline;
  }
+ .card-link::after {
+    padding-left: 0.5rem;
+    content: "\203A"
+}
 
  /*feature image*/
  .img-featured {
-     max-height: 95vh;
+     max-height: 92vh;
  }
  
   /*pagination*/
@@ -225,11 +294,11 @@
   }
  
   /*rows and cards columns */
-  @media only screen and (min-width: 567px) {
+  @media only screen and (min-width: 576px) {
     .row .card{width:100%;}
     .pagination{max-width:100%}
 }
-  @media only screen and (min-width: 568px) and (max-width: 768px) {
+  @media only screen and (min-width: 577px) and (max-width: 768px) {
     .row .card-columns.feature-splash {column-count: 2;}
     .row .card{width:100%;}
      .pagination{max-width:100%}
@@ -245,45 +314,95 @@
       .row .card-columns.feature-splash .card {max-width:44em;}
  }
 
- /*Overlay text onto feature images*/
+ /*HOME PAGE Overlay text onto feature images - need to get ratios better in mobile / desktop balance*/
 
- .card-img-overlay {
-     top: revert;
-     bottom: 0.5rem;
-     background-color: white;
-     text-align: left;
-     padding: 0.5em;
-     margin: 0 5% 17.5% 40%;
-
+ @media only screen and (max-width:576px) {
+    .home-feature {
+        background-image: url('/sites/default/files/home-page8.jpg');
+        box-shadow: inset 0 0 0 1000px rgba(255,255,255,.7);
+    }   
  }
- .card-img-overlay h3,  
- .card-img-overlay p {
+
+ .home-feature {
+    min-height: 425px;
+    overflow: hidden;
+    margin-bottom: 1em;
+    
+ }
+
+ .home-feature h1 {
+     font-weight:300;
+     font-size: 2em;
+     padding-top: 3rem;
+ }
+
+ .home-feature p {
+     text-align: center;
+ }
+
+ .card-splash {
+     background-color: white;
+     border-radius: 0;
+     border:none;
+ }
+
+ .card-splash .card-img-overlay {
+    top: revert;
+    bottom: 0.5rem;
+    background-color: white;
+    text-align: left;
+    padding: 1em;
+    margin: 0 1rem 5.5rem 1rem;
+ }
+
+ .home .card-splash .card-img-overlay {
+     margin-bottom: -6rem;
+ }
+
+ .row .card-columns.feature-splash .card {
+     margin-bottom: 8rem;
+ }
+
+ .card-splash .card-img-overlay .card-title {
+    text-transform: uppercase;
+    text-align: center;
+ }
+ 
+ .card-splash .card-text {
+     text-align: center;
+ }
+
+ .btn-splash {
      color: #454242; 
-     text-decoration: none;
+     border: 0.2rem solid #454242;
+     border-radius: 0;
+     background-color: white;
 }
- .card-img-overlay:hover, 
- .card-img-overlay:active, 
- .card-img-overlay:visited {
-     color: #454242; 
+
+ .btn-splash:hover, 
+ .btn-splash:active, 
+ .btn-splash:visited {
+     background-color: #454242;
+     color: white;
      text-decoration: underline;
+
     }
 
-    /*make the captions less in your face*/
-    .card-columns.feature-splash p.text-muted a,
-    .card-columns.feature-splash p.text-muted a:hover,
-    .card-columns.feature-splash p.text-muted a:active{
-        color: #6c757d;
+ a.btn-splash::after {
+        padding-left: 0.5rem;
+        content: "\203A"
     }
- 
+
   /*footer - uppercase that heading yo*/
-  .site-footer.site-footer{
+ .site-footer.site-footer {
       background:#454242;
       color:white;
      font-family:inherit;
      position:relative;
      z-index:999;
   }
-  .site-footer__bottom{
+
+  .site-footer__bottom {
       border: none;
       margin-top: 0;
   }
@@ -294,6 +413,7 @@
      text-transform:uppercase;
      padding-bottom: 0.5rem;
  }
+
  .qagoma .footer .links h2 {
      color:#454242;
  }
@@ -332,18 +452,29 @@
  dl dd.tags-upper {
      text-transform:uppercase;
  }
- dl .field--type-entity-reference{
+ 
+ dl .field--type-entity-reference {
      margin-bottom: 0;
  }
- dl .field--type-entity-reference .field__item{
+
+ dl .field--type-entity-reference .field__item {
     display: inline;
  }
- dl .field--name-field-subjects .field__item{
+
+ dl .field--name-field-subjects .field__item {
     padding-right: 0.5rem;
  }
 /*DL Metadata Column overrides*/
-dl.metadata-col dt{width:100%;margin:0 1rem;padding:0}
-dl.metadata-col dd{width:100%;margin:0 1rem 0.5rem 1rem;padding:0}
+ dl.metadata-col dt{
+    width:100%;
+    margin:0 1rem;
+    padding:0
+ }
+ dl.metadata-col dd{
+     width:100%;
+     margin:0 1rem 0.5rem 1rem;
+     padding:0
+ }
 
 
  /*end metadata elements*/
@@ -391,19 +522,7 @@ dl.metadata-col dd{width:100%;margin:0 1rem 0.5rem 1rem;padding:0}
   }
 
 
-  /*PRESENTATION HACKS, PLEASE REMOVE*/
+  /*WIP*/
 
-iframe{
-    overflow:hidden;
-}
-.mb-0 .btn-link{color: black; font-size: 1.1rem;}
-
-.accordion .card-header{ background-color: white;}
-
-.form-item-field-creation-date-range-value-min,
-.form-item-field-creation-date-range-value-max{ display: inline-block}
-
-#edit-actions {align-self: center;margin-top:16px;}
-
-#edit-actions .btn-primary{color:white; background-color:#454242; border: none;}
+  .view-similar-taxonomy{margin-top: 5rem;}
  
